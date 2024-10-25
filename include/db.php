@@ -1,7 +1,7 @@
 <?php
 $serverName = "localhost:3307";  // Update to "localhost" if default port is used
 $dbUsername = "root";
-$dbPassword = "123456";
+$dbPassword = "1234";
 $dbName = "car_rental";
 
 // Create connection
@@ -18,4 +18,3 @@ if (!$conn) {
 
 // Close connection when done
 // mysqli_close($conn);
-?>

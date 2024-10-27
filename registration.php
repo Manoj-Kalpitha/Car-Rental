@@ -1,3 +1,36 @@
+<?php
+
+@include './include/db.php';
+
+if (isset($_POST['submit'])) {
+
+    $filter_name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+    $name = mysqli_real_escape_string($conn, $filter_name);
+    $filter_email = filter_var($_POST['email'], FILTER_SANITIZE_STRING);
+    $email = mysqli_real_escape_string($conn, $filter_email);
+    $filter_pass = filter_var($_POST['pass'], FILTER_SANITIZE_STRING);
+    $pass = mysqli_real_escape_string($conn, md5($filter_pass));
+    $filter_cpass = filter_var($_POST['cpass'], FILTER_SANITIZE_STRING);
+    $cpass = mysqli_real_escape_string($conn, md5($filter_cpass));
+
+    $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email'") or die('query failed');
+
+    if (mysqli_num_rows($select_users) > 0) {
+        $message[] = 'user already exist!';
+    } else {
+        if ($pass != $cpass) {
+            $message[] = 'confirm password not matched!';
+        } else {
+            mysqli_query($conn, "INSERT INTO `users`(name, email, password) VALUES('$name', '$email', '$pass')") or die('query failed');
+            $message2[] = 'registered successfully!';
+        }
+    }
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,11 +60,11 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form_sec1">
-                        <form action="./include/signUp.php" method="post">
+                        <form action="" method="post">
                             <div class="">
                                 <div class="mb-3">
-                                    <label for="username">User Name</label>
-                                    <input type="text" class="form-control" name="username"
+                                    <label for="name">User Name</label>
+                                    <input type="text" class="form-control" name="name"
                                         placeholder="Enter Your name" required><br>
                                     <!-- <label for="password">Last Name</label>
                                     <input type="email" class="form-control" placeholder="Enter Last name" required> -->
@@ -40,10 +73,10 @@
                                     <input type="email" class="form-control" name="email" placeholder="Enter Your email"
                                         required><br>
                                     <label for="password">Password</label>
-                                    <input type="password" class="form-control" name="password"
+                                    <input type="password" class="form-control" name="pass"
                                         placeholder="Enter Your password" required><br>
                                     <label for="repeatpassword">Repeat Password</label>
-                                    <input type="password" class="form-control" name="repeatpassword"
+                                    <input type="password" class="form-control" name="cpass"
                                         placeholder="Repeat password" required>
 
                                 </div>

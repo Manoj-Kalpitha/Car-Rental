@@ -1,3 +1,8 @@
+<?php
+session_start();
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -36,19 +41,38 @@
           <li class="nav-item">
             <a class="nav-link navclra" href="contact.php">Contact Us</a>
           </li>
+          <?php
+          if (isset($_SESSION['user_id'])) {
+            echo '<li class="nav-item">
+              <button class="button btnlog"><a href="./include/logout.php">LogOut</a></button>
+               </li>';
+          }
+          ?>
         </ul>
-        <div class="d-flex align-items-center gap-2 px-4 ">
-          <button class="btn border-0 text-center profile_btn" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasProfile" aria-controls="offcanvasProfile">
-            <i class="bi bi-person-square text-white fs-4" data-lucide="circle-user-round"></i>
-          </button>
 
-          <!-- <div class="d-flex ms-4" role="search">
+        <?php
+
+        if (isset($_SESSION['user_id'])) {
+
+        ?>
+
+          <div class="d-flex align-items-center gap-2 px-4 ">
+            <button class="btn border-0 text-center profile_btn" data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasProfile" aria-controls="offcanvasProfile">
+              <i class="bi bi-person-square text-white fs-4" data-lucide="circle-user-round"></i>
+            </button>
+            <p><?php echo $_SESSION['user_name']; ?></p>
+
+
+            <!-- <div class="d-flex ms-4" role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
               </div>
               <button class="button1" type="submit">Search</button> -->
-          </form>
-        </div>
+            </form>
+          </div>
+        <?php
+        }
+        ?>
       </div>
   </nav>
 
@@ -67,8 +91,15 @@
             <h1>Hi, Welcome to <br><span>Car Rental Protal</span> </h1>
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim ut, id iusto nobis eveniet dolore
               cupiditate sequi aspernatur quam consequuntur!</p>
-            <button class="button btnlog" type="submit"><a href="login.php">Login</a></button>
-            <button class="button btnlog" type="submit"><a href="registration.php">Register</a></button>
+
+            <?php
+            if (!isset($_SESSION['user_id'])) {
+
+              echo '<button class ="button btnlog" type=""><a href="login.php">Login</a></button>
+                    <button class="button btnlog" type=""><a href="registration.php">Register</a></button>';
+            }
+
+            ?>
 
           </div>
         </div>

@@ -4,7 +4,7 @@ include_once '../include/db.php';
 if (isset($_GET['delete'])) {
    $id = $_GET['delete'];
    mysqli_query($conn, "DELETE FROM `users` WHERE id = '$id'") or die('query failed');
-   header('location:../index.php');
+   header('location:./users.php');
 }
 
 if (isset($_POST["user_type"])) {

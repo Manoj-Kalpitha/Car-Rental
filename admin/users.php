@@ -7,6 +7,13 @@ if (isset($_GET['delete'])) {
    header('location:../index.php');
 }
 
+if (isset($_POST["user_type"])) {
+
+   $_POST["user_id"];
+   mysqli_query($conn, "UPDATE `users` SET user_type = '$_POST[user_type]' WHERE id = '$_POST[user_id]'") or die('query failed');
+   header('location:./users.php');
+}
+
 ?>
 
 <!doctype html>
@@ -53,7 +60,7 @@ if (isset($_GET['delete'])) {
                                                                         } ?>"><?php echo $fetch_users['user_type']; ?></span>
                   </td>
                   <td>
-                     <form action="admin_users.php" method="post">
+                     <form action="users.php" method="post">
                         <input type="hidden" name="user_id" value="<?php echo $fetch_users['id']; ?>">
                         <div class="mb-3">
                            <label for="user_type" class="form-label text-danger fw-bold">Change User Type</label>

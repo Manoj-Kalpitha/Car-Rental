@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
             $_SESSION['admin_name'] = $row['name'];
             $_SESSION['admin_email'] = $row['email'];
             $_SESSION['admin_id'] = $row['id'];
-            header('location:./admin.php');
+            header('location:./admin/');
         } elseif ($row['user_type'] == 'user') {
 
             $_SESSION['user_name'] = $row['name'];

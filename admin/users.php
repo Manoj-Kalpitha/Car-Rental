@@ -1,6 +1,12 @@
 <?php
 include_once '../include/db.php';
 
+if (isset($_GET['delete'])) {
+   $id = $_GET['delete'];
+   mysqli_query($conn, "DELETE FROM `users` WHERE id = '$id'") or die('query failed');
+   header('location:../index.php');
+}
+
 ?>
 
 <!doctype html>
@@ -65,7 +71,7 @@ include_once '../include/db.php';
 
                   </td>
                   <td>
-                     <a href="admin_users.php?delete=<?php echo $fetch_users['id']; ?>" onclick="return confirm('Delete this user?');" class="btn btn-danger ">Delete User</a>
+                     <a href="users.php?delete=<?php echo $fetch_users['id']; ?>" onclick="return confirm('Delete this user?');" class="btn btn-danger ">Delete User</a>
                   </td>
                </tr>
             </tbody>

@@ -1,3 +1,37 @@
+<?php
+include_once "../include/db.php";
+
+// check if form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+
+   // Retrieve form data
+   $make = $_POST['make'];
+   $model = $_POST['model'];
+   $year = $_POST['year'];
+   $registration_no = $_POST['registration_no'];
+   $category = $_POST['category'];
+   $seating_capacity = $_POST['seating_capacity'];
+   $fuel_type = $_POST['fuel_type'];
+   $daily_rate = $_POST['daily_rate'];
+   $status = $_POST['status'];
+   $image_url = $_POST['image_url'];
+
+   // Insert data into the Cars table
+   $sql = "INSERT INTO Cars (make, model, year, registration_no, category, seating_capacity, fuel_type, daily_rate, status, image_url)
+            VALUES ('$make', '$model', '$year', '$registration_no', '$category', '$seating_capacity', '$fuel_type', '$daily_rate', '$status', '$image_url')";
+
+   if ($conn->query($sql) === TRUE) {
+      echo "New car added successfully!";
+   } else {
+      echo "Error: " . $sql . "<br>" . $conn->error;
+   }
+
+   // Close connection
+   $conn->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,7 +92,7 @@
          </div>
          <div class="form-group">
             <label for="image_url">Image URL</label>
-            <input type="url" class="form-control" id="image_url" name="image_url" required>
+            <input type="text" class="form-control" id="image_url" name="image_url" required>
          </div>
          <button type="submit" class="btn btn-primary">Add Car</button>
       </form>

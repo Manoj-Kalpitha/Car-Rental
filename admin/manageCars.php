@@ -78,7 +78,7 @@ $cars = $result->fetch_all(MYSQLI_ASSOC);
             <tbody>
                 <?php foreach ($cars as $car): ?>
                     <tr>
-                        <td><img src="<?= htmlspecialchars($car['image_url']); ?>" width="50" height="50" alt="Car Image"></td>
+                        <td><img src="../Assest/img/<?= htmlspecialchars($car['image_url']); ?>" width="50" height="50" alt="Car Image"></td>
                         <td><?= htmlspecialchars($car['make']); ?></td>
                         <td><?= htmlspecialchars($car['model']); ?></td>
                         <td><?= htmlspecialchars($car['year']); ?></td>
@@ -98,7 +98,7 @@ $cars = $result->fetch_all(MYSQLI_ASSOC);
                     <div class="modal fade" id="editModal<?= $car['car_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel<?= $car['car_id']; ?>" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <form action="manage_cars.php" method="POST">
+                                <form action="manageCars.php" method="POST">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="editModalLabel<?= $car['car_id']; ?>">Edit Car Details</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">

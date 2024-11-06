@@ -105,7 +105,9 @@ $conn->close();
 
 
   <div class="container border border-danger border-5">
-
+    <?php foreach ($cars as $car):
+      include "./carCard.php";
+    endforeach; ?>
   </div>
 
 

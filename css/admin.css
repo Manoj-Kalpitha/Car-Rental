@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+ 
+:root{
+    --primary-color:#001F3F;
+    --light-color:#EAD8B1;
+    --gray-color:#525252;
+    --graylight-color:rgb(241,241,241);
+    --main-padding:8rem 0;
+
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: "Jost", sans-serif;
+    /* max-width: 1366px; */
+    margin: 0 auto;
+    
+}
+
+.navimg{
+    width: 5rem;
+    height: auto;
+}
+
+.navclr{
+    background-color: #001F3F; 
+}
+.navclra{
+    color: #EAD8B1 !important;
+}
+
+.btni{
+    color: var(--light-color);
+    cursor: pointer;
+}
+
+.button1{
+    background-color: var(--light-color) !important;
+    color: var(--primary-color);
+    border: none;
+    padding: 0.6rem ;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 8px;
+}
+
+.button{
+    background-color: var(--primary-color)!important;
+    color: var(--light-color)!important;
+    border: none;
+    padding: 0.6rem 2rem;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+.button:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: cubic-bezier(0.84, 0.05, 0.18, 0.54)0.3s;
+    /* box-shadow: 0 0 100px 0 #acacac; */
+}
+.button1:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: cubic-bezier(0.84, 0.05, 0.18, 0.54)0.3s;
+    /* box-shadow: 0 0 100px 0 #acacac; */
+}
+
+
+
+/* **************************************************************************************** */
+
+.sidebar{
+  border: #001F3F 2px solid;
+  width: 250px;
+}
+
+
+
+/* **************************************************************************************** */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  list-style-type: none;
+}
+* ::-webkit-scrollbar {
+  width: 14px;
+}
+* ::-webkit-scrollbar-track {
+  background: #c1b9c1;
+}
+* ::-webkit-scrollbar-thumb {
+  background-color: #FF71CD;
+  border-end-end-radius: 10px;
+}
+* ::-webkit-scrollbar-thumb:hover {
+  background-color: #727bff;
+}
+
+body {
+  background: linear-gradient(to right, #ffd6f6, #e6f0ff);
+}
+body ::-moz-selection {
+  background-color: #ffb1e4;
+  color: white;
+}
+body ::selection {
+  background-color: #ffb1e4;
+  color: white;
+}
+
+img {
+  height: 300px;
+}/*# sourceMappingURL=admin_page.css.map */

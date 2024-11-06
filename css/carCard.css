@@ -1,0 +1,12 @@
+span {
+  margin: 6px 0px;
+}
+
+img {
+  object-fit: cover;
+  background-repeat: no-repeat;
+  display: block;
+  width: 250px;
+  height: 100%;
+  object-position: top;
+}

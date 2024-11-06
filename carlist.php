@@ -106,6 +106,15 @@ $conn->close();
 
   <div class="container border border-danger border-5">
     <?php foreach ($cars as $car):
+      $carName = $car["make"] . " " . $car["model"] . " " . $car["year"];
+      $year = $car["year"];
+      $regNo = $car["registration_no"];
+      $seatCapacity = $car["seating_capacity"];
+      $category = $car["category"];
+      $fuelType = $car["fuel_type"];
+      $availability = $car["status"];
+
+
       include "./carCard.php";
     endforeach; ?>
   </div>

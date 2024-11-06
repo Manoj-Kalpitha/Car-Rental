@@ -105,7 +105,7 @@ $conn->close();
 
   <div class="container d-flex flex-wrap gap-5 p-5">
     <?php foreach ($cars as $car):
-      $carName = $car["make"] . " " . $car["model"] . " " . $car["year"];
+      $carName = $car["make"] . " " . $car["model"];
       $year = $car["year"];
       $regNo = $car["registration_no"];
       $seatCapacity = $car["seating_capacity"];

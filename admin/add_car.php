@@ -1,66 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../css/admin.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+   <meta charset="UTF-8">
+   <title>Add New Car</title>
+   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-    
-
-    <section class="container my-5">
-        <div class="row justify-content-center">
-           <div class="col-md-6">
-              <form action="" method="POST" enctype="multipart/form-data" class="bg-light p-4 rounded shadow-sm">
-                 <h3 class="text-center mb-4 text-muted">Add New Car</h3>
-                 <div class="mb-3">
-                    <input type="text" class="form-control" required placeholder="Name" name="name" autocomplete="off">
-                 </div>
-                 <div class="mb-3">
-                    <input type="number" min="0" class="form-control" required placeholder="Price (Rs.)" name="price" autocomplete="off">
-                 </div>
-                 <div class="mb-3">
-                    <select name="category_id" class="form-select" required>
-                       <option value="">Select Category</option>
-                       <?php
-                      
-                          $select_categories = mysqli_query($conn, "SELECT * FROM categories") or die('query failed');
-                          while ($fetch_categories = mysqli_fetch_assoc($select_categories)) {
-                             echo '<option value="' . $fetch_categories['category_id'] . '">' . $fetch_categories['name'] . '</option>';
-                          }
-                       ?>
-                    </select>
-                 </div>
-                 <div class="mb-3">
-                    <input type="file" accept="image/jpg, image/jpeg, image/png, image/webp" required class="form-control" name="image" autocomplete="off">
-                 </div>
-                 <div class="mb-3">
-                    <input type="file" accept="image/jpg, image/jpeg, image/png, image/webp" required class="form-control" name="image" autocomplete="off">
-                 </div>
-                 <div class="mb-3">
-                    <input type="file" accept="image/jpg, image/jpeg, image/png, image/webp" required class="form-control" name="image" autocomplete="off">
-                 </div>
-                 <div class="mb-3">
-                    <input type="file" accept="image/jpg, image/jpeg, image/png, image/webp" required class="form-control" name="image" autocomplete="off">
-                 </div>
-                 <div class="mb-3">
-                    <input type="text" class="form-control" required placeholder="Description" name="details" autocomplete="off">
-                 </div>
-                 <div class="text-center">
-                    <input type="submit" value="Add Product" name="add_product" class="btn button w-50">
-                 </div>
-              </form>
-           </div>
-        </div>
-     </section>
-
-
-
-
-
-
-
+   <div class="container my-4">
+      <h2>Add New Car</h2>
+      <form action="" method="POST">
+         <div class="form-group">
+            <label for="make">Make</label>
+            <input type="text" class="form-control" id="make" name="make" required>
+         </div>
+         <div class="form-group">
+            <label for="model">Model</label>
+            <input type="text" class="form-control" id="model" name="model" required>
+         </div>
+         <div class="form-group">
+            <label for="year">Year</label>
+            <input type="number" class="form-control" id="year" name="year" required>
+         </div>
+         <div class="form-group">
+            <label for="registration_no">Registration Number</label>
+            <input type="text" class="form-control" id="registration_no" name="registration_no" required>
+         </div>
+         <div class="form-group">
+            <label for="category">Category</label>
+            <input type="text" class="form-control" id="category" name="category" required>
+         </div>
+         <div class="form-group">
+            <label for="seating_capacity">Seating Capacity</label>
+            <input type="number" class="form-control" id="seating_capacity" name="seating_capacity" required>
+         </div>
+         <div class="form-group">
+            <label for="fuel_type">Fuel Type</label>
+            <select class="form-control" id="fuel_type" name="fuel_type" required>
+               <option>Gasoline</option>
+               <option>Diesel</option>
+               <option>Electric</option>
+               <option>Hybrid</option>
+            </select>
+         </div>
+         <div class="form-group">
+            <label for="daily_rate">Daily Rate</label>
+            <input type="number" step="0.01" class="form-control" id="daily_rate" name="daily_rate" required>
+         </div>
+         <div class="form-group">
+            <label for="status">Status</label>
+            <select class="form-control" id="status" name="status" required>
+               <option>Available</option>
+               <option>Rented</option>
+               <option>Maintenance</option>
+            </select>
+         </div>
+         <div class="form-group">
+            <label for="image_url">Image URL</label>
+            <input type="url" class="form-control" id="image_url" name="image_url" required>
+         </div>
+         <button type="submit" class="btn btn-primary">Add Car</button>
+      </form>
+   </div>
 </body>
+
 </html>

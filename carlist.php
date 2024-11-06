@@ -16,8 +16,6 @@ if ($result->num_rows > 0) {
   }
 }
 
-var_dump($cars);
-
 // Close the database connection
 $conn->close();
 
@@ -104,7 +102,7 @@ $conn->close();
 
 
 
-  <div class="container border border-danger border-5">
+  <div class="container d-flex flex-wrap gap-5 p-5 border border-danger border-5">
     <?php foreach ($cars as $car):
       $carName = $car["make"] . " " . $car["model"] . " " . $car["year"];
       $year = $car["year"];

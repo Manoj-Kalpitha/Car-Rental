@@ -1,3 +1,28 @@
+<?php
+include_once "./include/db.php";
+
+// SQL query to select all items from the cars table
+$sql = "SELECT * FROM cars";
+
+// Execute the query and fetch all results into a variable
+$result = $conn->query($sql);
+
+$cars = [];
+
+if ($result->num_rows > 0) {
+  // Fetch each row as an associative array and add it to $cars
+  while ($row = $result->fetch_assoc()) {
+    $cars[] = $row;
+  }
+}
+
+var_dump($cars);
+
+// Close the database connection
+$conn->close();
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -79,7 +104,9 @@
 
 
 
+  <div class="container border border-danger border-5">
 
+  </div>
 
 
 

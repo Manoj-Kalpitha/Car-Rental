@@ -22,7 +22,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_id'])) {
     $fuel_type = $_POST['fuel_type'];
     $daily_rate = $_POST['daily_rate'];
     $status = $_POST['status'];
-    $image_url = $_POST['image_url'];
+    $image_url = $_POST['image_url']; // Default to current image URL
+
+    // Check if a new file was uploaded
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $targetDir = "../Assest/img/uploads/";
+        $fileName = basename($_FILES["image"]["name"]);
+        $targetFilePath = $targetDir . $fileName;
+        $imageFileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
+
+        // Move the uploaded file to the target directory
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFilePath)) {
+            $targetFilePath = $fileName;
+            $image_url = $targetFilePath; // Update image URL to the new file path
+        }
+    }
 
     $sql = "UPDATE Cars SET 
                 make = '$make',
@@ -45,6 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_id'])) {
 $result = $conn->query("SELECT * FROM Cars");
 $cars = $result->fetch_all(MYSQLI_ASSOC);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -78,7 +93,7 @@ $cars = $result->fetch_all(MYSQLI_ASSOC);
             <tbody>
                 <?php foreach ($cars as $car): ?>
                     <tr>
-                        <td><img src="../Assest/img/<?= htmlspecialchars($car['image_url']); ?>" width="50" height="50" alt="Car Image"></td>
+                        <td><img src="../Assest/img/uploads/<?= htmlspecialchars($car['image_url']); ?>" width="50" height="50" alt="Car Image"></td>
                         <td><?= htmlspecialchars($car['make']); ?></td>
                         <td><?= htmlspecialchars($car['model']); ?></td>
                         <td><?= htmlspecialchars($car['year']); ?></td>
@@ -94,11 +109,14 @@ $cars = $result->fetch_all(MYSQLI_ASSOC);
                         </td>
                     </tr>
 
+
+
+
                     <!-- Edit Modal -->
                     <div class="modal fade" id="editModal<?= $car['car_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel<?= $car['car_id']; ?>" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <form action="manageCars.php" method="POST">
+                                <form action="manageCars.php" method="POST" enctype="multipart/form-data">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="editModalLabel<?= $car['car_id']; ?>">Edit Car Details</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -148,8 +166,8 @@ $cars = $result->fetch_all(MYSQLI_ASSOC);
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label>Image URL</label>
-                                            <input type="text" class="form-control" name="image_url" value="<?= htmlspecialchars($car['image_url']); ?>" required>
+                                            <label>Upload Image</label>
+                                            <input type="file" class="form-control-file" name="image">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -160,6 +178,7 @@ $cars = $result->fetch_all(MYSQLI_ASSOC);
                             </div>
                         </div>
                     </div>
+
                     <!-- End Edit Modal -->
                 <?php endforeach; ?>
             </tbody>

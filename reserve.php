@@ -135,14 +135,50 @@ if (isset($_GET["id"])) {
                 <label for="end_date">Reservation End Date</label>
                 <input type="date" id="end_date" name="end_date" required>
 
-                <!-- Total Cost (based on car's daily rate and the number of days) -->
+                <!-- Total Cost -->
                 <label for="total_cost">Total Cost</label>
                 <input type="text" id="total_cost" name="total_cost" value="0.00" readonly>
 
+                <!-- Terms and Conditions -->
+                <label class="d-flex justify-content-start p-0 m-0">
+                    <input type="checkbox" name="agree_terms" id="agree_terms" required class="form-check-input">
+                    <span class="ms-2">I agree to the <a href="#terms-modal" id="terms-link">Terms and Conditions</a>.</span>
+                </label>
                 <!-- Submit Button -->
                 <button type="submit">Reserve Car</button>
             </form>
         </section>
+
+        <!-- Terms and Conditions Modal (optional) -->
+        <div id="terms-modal" class="terms-modal" style="display:none;">
+            <div class="modal-content">
+                <span class="close-btn" onclick="document.getElementById('terms-modal').style.display='none'">&times;</span>
+                <h2>Terms and Conditions</h2>
+                <p><strong>1. Reservation and Payment:</strong> All reservations require a valid payment method. Payments must be made in full before confirming the reservation. The full payment is based on the rental period and car selected.</p>
+                <p><strong>2. Reservation Period:</strong> The rental period begins on the reservation start date and ends on the reservation end date as selected by the customer.</p>
+                <p><strong>3. Late Return Policy:</strong> If the car is not returned on or before the reservation end date, a charge of 5000 LKR per day will apply for each additional day the car is held beyond the agreed return date.</p>
+                <p><strong>4. Damage and Liability:</strong> The customer is responsible for any damages, loss, or theft of the car during the rental period. In the case of any damage, the customer will be liable for repair costs, and any insurance provided by the rental company will not cover these expenses.</p>
+                <p><strong>5. Fuel Policy:</strong> The car should be returned with the same amount of fuel as when it was rented. A refueling charge will be applied if the car is returned with less fuel.</p>
+                <p><strong>6. Cancellations and Refunds:</strong> Cancellations made more than 48 hours before the reservation start date will receive a full refund. Cancellations made within 48 hours of the reservation start date may incur a cancellation fee.</p>
+                <p><strong>7. Driver Requirements:</strong> The driver must be at least 21 years of age and possess a valid driver's license. Additional charges may apply for drivers under 25.</p>
+                <p><strong>8. Insurance:</strong> Basic insurance is included in the rental, but the customer may choose to purchase additional coverage at the time of booking.</p>
+                <p><strong>9. Governing Law:</strong> These terms and conditions are governed by the laws of Sri Lanka, and any disputes will be subject to the jurisdiction of Sri Lankan courts.</p>
+            </div>
+        </div>
+
+        <script>
+            // Show the terms and conditions modal when the link is clicked
+            document.getElementById("terms-link").addEventListener("click", function(e) {
+                e.preventDefault();
+                document.getElementById("terms-modal").style.display = "block";
+            });
+
+            // Close the modal when the user clicks the close button
+            function closeModal() {
+                document.getElementById("terms-modal").style.display = "none";
+            }
+        </script>
+
     </div>
 
     <?php include_once "./include/footer.php"; ?>

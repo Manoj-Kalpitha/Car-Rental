@@ -17,6 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             removeUser($conn, $userId);
         } elseif ($action === 'suspend') {
             suspendUser($conn, $userId);
+        } elseif ($action === 'change') {
+            ChangeUser($conn, $userId);
         }
 
         // Redirect back to the manage users page
@@ -34,6 +36,30 @@ function removeUser($conn, $userId)
         echo "Error removing user: " . $stmt->error;
     }
     $stmt->close();
+}
+function changeUser($conn, $userId)
+{
+    $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        if ($row['user_type'] == 'admin') {
+            $stmt = $conn->prepare("UPDATE users SET user_type = 'user' WHERE id = ?");
+            $stmt->bind_param("i", $userId);
+            if (!$stmt->execute()) {
+                echo "Error removing user: " . $stmt->error;
+            }
+        } else {
+            $stmt = $conn->prepare("UPDATE users SET user_type = 'admin' WHERE id = ?");
+            $stmt->bind_param("i", $userId);
+            if (!$stmt->execute()) {
+                echo "Error removing user: " . $stmt->error;
+            }
+        }
+    }
 }
 
 // Function to suspend a user
@@ -76,7 +102,6 @@ function suspendUser($conn, $userId)
         }
 
         button {
-            padding: 5px 10px;
             margin: 2px;
             border: none;
             cursor: pointer;
@@ -108,7 +133,7 @@ function suspendUser($conn, $userId)
         </thead>
         <tbody>
             <?php
-            $query = "SELECT id, name, email FROM users";
+            $query = "SELECT id, name, email,user_type FROM users";
             $result = mysqli_query($conn, $query);
 
             if ($result && mysqli_num_rows($result) > 0) {
@@ -120,13 +145,17 @@ function suspendUser($conn, $userId)
                     echo "<td>
                             <form action='userManagement.php' method='POST' style='display:inline;'>
                                 <input type='hidden' name='user_id' value='" . htmlspecialchars($row['id']) . "'>
-                                <button type='submit' name='action' value='remove' class='remove-btn'>Remove</button>
+                                <button type='submit' name='action' value='remove' class='remove-btn btn-md btn'>Remove</button>
                             </form>
                             <form action='userManagement.php' method='POST' style='display:inline;'>
                                 <input type='hidden' name='user_id' value='" . htmlspecialchars($row['id']) . "'>
-                                <button type='submit' name='action' value='suspend' class='suspend-btn'>Suspend</button>
+                                <button type='submit' name='action' value='suspend' class='suspend-btn btn-md btn'>Suspend</button>
                             </form>
-                          </td>";
+                            <form action='userManagement.php' method='POST' style='display:inline;'>
+                                <input type='hidden' name='user_id' value='" . htmlspecialchars($row['id']) . "'>
+                                <button type='submit' name='action' value='change' class='btn btn-primary btn-md'>Make As " . htmlspecialchars($row['user_type']) . "</button>
+                            </form>
+                        </td>";
                     echo "</tr>";
                 }
             } else {

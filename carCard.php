@@ -16,11 +16,13 @@
                     <?php
                     if ($availability == "Available") {
                     ?>
-                        <button class="btn btn-outline-primary  mt-3">Reserve Now</button>
+                        <button class="btn btn-outline-primary  mt-3">
+                            <a href="reserve.php?id=<?php echo $carId ?>">Reserve Now</a>
+                        </button>
                     <?php
                     } else {
                     ?>
-                        <button class="btn btn-outline-danger mt-3" disabled>Reserve Now</button>
+                        <button class="btn btn-outline-danger mt-3" disabled>Reserved</button>
                     <?php
                     }
                     ?>

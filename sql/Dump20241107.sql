@@ -1,6 +1,12 @@
+<<<<<<< HEAD
+-- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
+--
+-- Host: localhost    Database: car_rental
+=======
 -- MySQL dump 10.13  Distrib 8.0.38, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: car_rental
+>>>>>>> b91a0cfca10f34dd6738034419f94183f8c9d993
 -- ------------------------------------------------------
 -- Server version	8.0.39
 
@@ -16,6 +22,8 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+<<<<<<< HEAD
+=======
 -- Table structure for table `car_availability`
 --
 
@@ -226,6 +234,7 @@ LOCK TABLES `reservations` WRITE;
 UNLOCK TABLES;
 
 --
+>>>>>>> b91a0cfca10f34dd6738034419f94183f8c9d993
 -- Table structure for table `users`
 --
 
@@ -234,12 +243,21 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
+<<<<<<< HEAD
+  `name` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(32) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `user_type` varchar(45) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'user',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+=======
   `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `email` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `user_type` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'user',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+>>>>>>> b91a0cfca10f34dd6738034419f94183f8c9d993
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -248,7 +266,11 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+<<<<<<< HEAD
+INSERT INTO `users` VALUES (2,'Manoj','manoj@gmail.com','202cb962ac59075b964b07152d234b70','admin');
+=======
 INSERT INTO `users` VALUES (2,'Manoj','manoj@gmail.com','202cb962ac59075b964b07152d234b70','admin'),(5,'Dimuth','dimuth@gmail.com','202cb962ac59075b964b07152d234b70','user');
+>>>>>>> b91a0cfca10f34dd6738034419f94183f8c9d993
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -261,4 +283,8 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+<<<<<<< HEAD
+-- Dump completed on 2024-11-07  0:04:09
+=======
 -- Dump completed on 2024-11-07  1:57:37
+>>>>>>> b91a0cfca10f34dd6738034419f94183f8c9d993

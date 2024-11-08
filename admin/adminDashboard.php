@@ -86,7 +86,8 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';  // Default to 'dash
         <a href="?page=addCar" class="nav-link <?= ($page == 'addCar') ? 'active' : '' ?>">Add Car</a>
         <a href="?page=rentalManagement" class="nav-link <?= ($page == 'rentalManagement') ? 'active' : '' ?>">Rental Management</a>
         <a href="?page=userManagement" class="nav-link <?= ($page == 'userManagement') ? 'active' : '' ?>">User Management</a>
-        <a href="logout.php" class="nav-link text-danger">Logout</a>
+        <a href="../index.php" class="nav-link text-primary">Home</a>
+        <a href="../include/logout.php" class="nav-link text-danger">Logout</a>
     </div>
 
     <!-- Main content -->

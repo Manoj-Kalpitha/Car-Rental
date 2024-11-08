@@ -1,5 +1,6 @@
 <?php
 include_once "./include/db.php";
+session_start();
 
 // SQL query to select all items from the cars table
 $sql = "SELECT * FROM cars";
@@ -38,7 +39,7 @@ $conn->close();
 
 <body>
   <?php
-  include_once "./nav.php";
+  include_once "./include/nav.php";
   ?>
 
   <!-- filter*******************************************************-->

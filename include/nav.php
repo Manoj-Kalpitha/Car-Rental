@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,10 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
+
 <body>
 
-<nav class="navbar navbar-expand-lg navclr p-3">
+  <nav class="navbar navbar-expand-lg navclr p-3">
     <div class="container-fluid">
       <a class="navbar-brand navclra" href="#"><img src="./Assest/img//logo_v4.png" class=" navimg rounded float-start"
           alt="..."></a>
@@ -32,6 +34,27 @@
           <li class="nav-item">
             <a class="nav-link navclra" href="contact.php">Contact Us</a>
           </li>
+          <?php
+          if (isset($_SESSION['user_name'])) {
+            if (isset($_SESSION['admin']) == true) { ?>
+              <li class="nav-item">
+                <a class="nav-link navclra" href="./admin/adminDashboard.php">Admin Dashboard</a>
+              </li>
+            <?php }
+            ?>
+            <li class="nav-item">
+              <a class="nav-link navclra" href="p"><?php echo $_SESSION['user_name'] ?></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link navclra" href="./include/logout.php">Log Out</a>
+            </li>
+          <?php
+          } else { ?>
+            <li class="nav-item">
+              <a class="nav-link navclra" href="./login.php">Login</a>
+            </li>
+          <?php }
+          ?>
         </ul>
 
         <div class="d-flex align-items-center gap-2 px-4">
@@ -39,9 +62,9 @@
             data-bs-target="#offcanvasProfile" aria-controls="offcanvasProfile">
             <i class="bi bi-person-square text-white fs-4" data-lucide="circle-user-round"></i>
           </button>
-
           </form>
         </div>
+
       </div>
   </nav>
 </body>
@@ -61,5 +84,5 @@
 
 <!-- swiper -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
-</html>
 
+</html>

@@ -13,7 +13,18 @@
                     <span class="badge text-bg-danger">Seat Capacity - <?php echo $seatCapacity ?></span>
                     <span class="badge text-bg-warning">Fuel Type - <?php echo $fuelType ?></span>
                     <span class="badge text-bg-info"><?php echo $availability ?></span> <br>
-                    <button class="btn btn-outline-primary  mt-3">Reserve Now</button>
+                    <?php
+                    if ($availability == "Available") {
+                    ?>
+                        <button class="btn btn-outline-primary  mt-3">Reserve Now</button>
+                    <?php
+                    } else {
+                    ?>
+                        <button class="btn btn-outline-danger mt-3" disabled>Reserve Now</button>
+                    <?php
+                    }
+                    ?>
+
                 </div>
             </div>
         </div>

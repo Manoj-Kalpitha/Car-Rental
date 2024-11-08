@@ -1,9 +1,8 @@
 <?php
 include_once "../include/db.php";
 
-// check if form is submitted
+// Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
 
    // Retrieve form data
    $make = $_POST['make'];
@@ -15,16 +14,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    $fuel_type = $_POST['fuel_type'];
    $daily_rate = $_POST['daily_rate'];
    $status = $_POST['status'];
-   $image_url = $_POST['image_url'];
 
-   // Insert data into the Cars table
-   $sql = "INSERT INTO Cars (make, model, year, registration_no, category, seating_capacity, fuel_type, daily_rate, status, image_url)
-            VALUES ('$make', '$model', '$year', '$registration_no', '$category', '$seating_capacity', '$fuel_type', '$daily_rate', '$status', '$image_url')";
+   // Handle file upload
+   $targetDir = "../Assest/img/uploads/";
+   $targetFile = $targetDir . basename($_FILES["image"]["name"]);
+   $uploadOk = 1;
+   $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-   if ($conn->query($sql) === TRUE) {
-      echo "New car added successfully!";
+   // Check if image file is an actual image or fake image
+   $check = getimagesize($_FILES["image"]["tmp_name"]);
+   if ($check !== false) {
+      $uploadOk = 1;
    } else {
-      echo "Error: " . $sql . "<br>" . $conn->error;
+      echo "File is not an image.";
+      $uploadOk = 0;
+   }
+
+   // Check if file already exists
+   if (file_exists($targetFile)) {
+      echo "Sorry, file already exists.";
+      $uploadOk = 0;
+   }
+
+   // Check file size
+   if ($_FILES["image"]["size"] > 50000000000) { // Limit file size to 500KB
+      echo "Sorry, your file is too large.";
+      $uploadOk = 0;
+   }
+
+   // Allow certain file formats
+   if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+      echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+      $uploadOk = 0;
+   }
+
+   // Check if $uploadOk is set to 0 by an error
+   if ($uploadOk == 0) {
+      echo "Sorry, your file was not uploaded.";
+      // If everything is ok, try to upload file
+   } else {
+      if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+         $targetFile =  basename($_FILES["image"]["name"]);
+         // Insert data into the Cars table, with the file path as the image URL
+         $sql = "INSERT INTO Cars (make, model, year, registration_no, category, seating_capacity, fuel_type, daily_rate, status, image_url)
+                    VALUES ('$make', '$model', '$year', '$registration_no', '$category', '$seating_capacity', '$fuel_type', '$daily_rate', '$status', '$targetFile')";
+
+         if ($conn->query($sql) === TRUE) {
+            echo "New car added successfully!";
+         } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+         }
+      } else {
+         echo "Sorry, there was an error uploading your file.";
+      }
    }
 
    // Close connection
@@ -44,7 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
    <div class="container my-4">
       <h2>Add New Car</h2>
-      <form action="" method="POST">
+      <form action="" method="POST" enctype="multipart/form-data">
          <div class="form-group">
             <label for="make">Make</label>
             <input type="text" class="form-control" id="make" name="make" required>
@@ -91,8 +133,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </select>
          </div>
          <div class="form-group">
-            <label for="image_url">Image URL</label>
-            <input type="text" class="form-control" id="image_url" name="image_url" required>
+            <label for="image">Upload Image</label>
+            <input type="file" class="form-control-file" id="image" name="image" required>
          </div>
          <button type="submit" class="btn btn-primary">Add Car</button>
       </form>

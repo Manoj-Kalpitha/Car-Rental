@@ -78,7 +78,7 @@ $cars = $result->fetch_all(MYSQLI_ASSOC);
             <tbody>
                 <?php foreach ($cars as $car): ?>
                     <tr>
-                        <td><img src="../Assest/img/<?= htmlspecialchars($car['image_url']); ?>" width="50" height="50" alt="Car Image"></td>
+                        <td><img src="../Assest/img/uploads/<?= htmlspecialchars($car['image_url']); ?>" width="50" height="50" alt="Car Image"></td>
                         <td><?= htmlspecialchars($car['make']); ?></td>
                         <td><?= htmlspecialchars($car['model']); ?></td>
                         <td><?= htmlspecialchars($car['year']); ?></td>

@@ -6,7 +6,7 @@ include_once "../include/db.php";
 if (isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
     $conn->query("DELETE FROM Cars WHERE car_id = $delete_id");
-    header("Location: manageCars.php");
+    header("Location: adminDashboard.php?page=manageCars");
     exit();
 }
 
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_id'])) {
                 image_url = '$image_url'
             WHERE car_id = $update_id";
     $conn->query($sql);
-    header("Location: manageCars.php");
+    header("Location: adminDashboard.php?page=manageCars");
     exit();
 }
 

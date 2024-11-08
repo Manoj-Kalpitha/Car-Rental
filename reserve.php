@@ -5,6 +5,7 @@ include_once "./include/db.php";
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
 
+    // Query to fetch car details based on car_id
     $stmt = $conn->prepare("SELECT * FROM cars WHERE car_id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -14,9 +15,6 @@ if (isset($_GET["id"])) {
     header("Location: carlist.php");
     exit;
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +27,7 @@ if (isset($_GET["id"])) {
     <link rel="stylesheet" href="./css/nav.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="stylesheet" href="./css/style.css">
-    <title>Reservation Page</title>
+    <title>Car Rental Reservation</title>
 
     <style>
         * {
@@ -37,7 +35,6 @@ if (isset($_GET["id"])) {
             padding: 0;
             box-sizing: border-box;
         }
-
 
         .main-container {
             width: 90%;
@@ -104,57 +101,75 @@ if (isset($_GET["id"])) {
 </head>
 
 <body>
-    <?php
-    include_once "./include/nav.php";
-    ?>
+    <?php include_once "./include/nav.php"; ?>
+
     <div class="main-container">
         <header>
             <h1><?php echo $result["make"] . " " . $result["model"] . " " . $result["year"]; ?></h1>
-            <img src="./Assest/img/uploads/<?php echo $result["image_url"] ?>" alt="" class="img-fluid mt-5 mb-4">
+            <img src="./Assest/img/uploads/<?php echo $result["image_url"]; ?>" alt="Car Image" class="img-fluid mt-5 mb-4">
+            <p>Reserve this car for your trip!</p>
         </header>
 
         <section class="reservation-form">
-            <form action="#" method="POST">
+            <form action="process_reservation.php" method="POST">
+                <!-- Hidden car_id to associate with reservation -->
+                <input type="hidden" name="car_id" value="<?php echo $result['car_id']; ?>">
+
+                <!-- Full Name -->
                 <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required placeholder="John Doe">
 
+                <!-- Email Address -->
                 <label for="email">Email Address</label>
                 <input type="email" id="email" name="email" required placeholder="example@email.com">
 
+                <!-- Phone Number -->
                 <label for="phone">Phone Number</label>
                 <input type="tel" id="phone" name="phone" required placeholder="(123) 456-7890">
 
-                <label for="date">Reservation Date</label>
-                <input type="date" id="date" name="date" required>
+                <!-- Reservation Start Date -->
+                <label for="start_date">Reservation Start Date</label>
+                <input type="date" id="start_date" name="start_date" required>
 
-                <label for="time">Reservation Time</label>
-                <input type="time" id="time" name="time" required>
+                <!-- Reservation End Date -->
+                <label for="end_date">Reservation End Date</label>
+                <input type="date" id="end_date" name="end_date" required>
 
-                <label for="guests">Number of Guests</label>
-                <select id="guests" name="guests" required>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
+                <!-- Total Cost (based on car's daily rate and the number of days) -->
+                <label for="total_cost">Total Cost</label>
+                <input type="text" id="total_cost" name="total_cost" value="0.00" readonly>
 
-                <button type="submit">Reserve Table</button>
+                <!-- Submit Button -->
+                <button type="submit">Reserve Car</button>
             </form>
         </section>
-
-
     </div>
 
-    <?php
-    include_once "./include/footer.php";
-    ?>
+    <?php include_once "./include/footer.php"; ?>
 
+    <script>
+        // JavaScript to calculate total cost based on reservation start and end dates
+        const startDateInput = document.getElementById('start_date');
+        const endDateInput = document.getElementById('end_date');
+        const totalCostInput = document.getElementById('total_cost');
+        const dailyRate = <?php echo $result['daily_rate']; ?>; // Assume the daily rental rate is stored in the database
+
+        function calculateTotalCost() {
+            const startDate = new Date(startDateInput.value);
+            const endDate = new Date(endDateInput.value);
+
+            if (startDate && endDate && endDate >= startDate) {
+                const timeDiff = endDate - startDate;
+                const days = timeDiff / (1000 * 3600 * 24); // Convert milliseconds to days
+                const totalCost = days * dailyRate;
+                totalCostInput.value = totalCost.toFixed(2);
+            }
+        }
+
+        // Add event listeners to recalculate cost when dates change
+        startDateInput.addEventListener('change', calculateTotalCost);
+        endDateInput.addEventListener('change', calculateTotalCost);
+    </script>
 </body>
 
 </html>

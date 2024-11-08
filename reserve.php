@@ -9,6 +9,7 @@ if (isset($_GET["id"])) {
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
+    $result = $result->fetch_assoc();
 } else {
     header("Location: carlist.php");
     exit;
@@ -108,8 +109,8 @@ if (isset($_GET["id"])) {
     ?>
     <div class="main-container">
         <header>
-            <h1><?php ?></h1>
-            <p>Please fill out the form below to reserve a table.</p>
+            <h1><?php echo $result["make"] . " " . $result["model"] . " " . $result["year"]; ?></h1>
+            <img src="./Assest/img/uploads/<?php echo $result["image_url"] ?>" alt="" class="img-fluid mt-5 mb-4">
         </header>
 
         <section class="reservation-form">

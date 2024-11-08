@@ -16,13 +16,13 @@
         <i data-lucide="twitter" class="btni"></i>
       </a>
       <a href="#" class="me-4 text-reset">
-        <i data-lucide="instagram"class="btni"></i>
+        <i data-lucide="instagram" class="btni"></i>
       </a>
       <a href="#" class="me-4 text-reset">
-        <i data-lucide="linkedin"class="btni"></i>
+        <i data-lucide="linkedin" class="btni"></i>
       </a>
       <a href="#" class="me-4 text-reset">
-        <i data-lucide="github"class="btni"></i>
+        <i data-lucide="github" class="btni"></i>
       </a>
     </div>
     <!-- Right -->
@@ -38,7 +38,7 @@
         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
           <!-- Content -->
           <h6 class="text-uppercase fw-bold mb-4 ">
-            <i data-lucide="gem"class="btni"> </i> car rental 
+            <i data-lucide="gem" class="btni"> </i> car rental
           </h6>
           <p>
             Here you can use rows and columns to organize your footer content. Lorem ipsum
@@ -72,10 +72,10 @@
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-          <p><i data-lucide="house" class="btni"></i>   New York, NY 10012, US</p>
-          <p><i data-lucide="mail" class="btni"></i>   carrental@gmail.com</p>
-          <p><i data-lucide="phone" class="btni"></i>   +94 71 085 4183</p>
-          <p><i data-lucide="phone" class="btni"></i>   +94 75 801 4532</p>
+          <p><i data-lucide="house" class="btni"></i> New York, NY 10012, US</p>
+          <p><i data-lucide="mail" class="btni"></i> carrental@gmail.com</p>
+          <p><i data-lucide="phone" class="btni"></i> +94 71 085 4183</p>
+          <p><i data-lucide="phone" class="btni"></i> +94 75 801 4532</p>
         </div>
         <!-- Grid column -->
       </div>
@@ -87,7 +87,7 @@
   <!-- Copyright -->
   <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
     <p>© 2024 Copyright : <a class="text-reset fw-bold" href="https://mdbootstrap.com/">CarRental.com</a></p>
-    
+
   </div>
   <!-- Copyright -->
 </footer>

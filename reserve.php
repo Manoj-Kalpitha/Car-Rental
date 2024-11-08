@@ -2,6 +2,29 @@
 session_start();
 include_once "./include/db.php";
 
+if (isset($_POST["submit"])) {
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $phone = $_POST["phone"];
+    $start_date = $_POST["start_date"];
+    $end_date = $_POST["end_date"];
+    $total_cost = $_POST["total_cost"];
+    $userId = $_SESSION['user_id'];
+
+    $stmt = $conn->prepare("INSERT INTO reservations (customer_id, car_id, start_date, end_date, total_cost) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("iissi", $userId, $id, $start_date, $end_date, $total_cost);
+
+
+    if ($stmt->execute()) {
+        header("Location: reserved.php?done");
+        exit;
+    } else {
+        header("Location: reserved.php?fail");
+    }
+
+    $stmt->close();
+}
+
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
 
@@ -14,6 +37,29 @@ if (isset($_GET["id"])) {
 } else {
     header("Location: carlist.php");
     exit;
+}
+
+if (isset($_POST["submit"])) {
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $phone = $_POST["phone"];
+    $start_date = $_POST["start_date"];
+    $end_date = $_POST["end_date"];
+    $total_cost = $_POST["total_cost"];
+    $userId = $_SESSION['user_id'];
+
+    $stmt = $conn->prepare("INSERT INTO reservations (customer_id, car_id, start_date, end_date, total_cost) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("iissi", $userId, $id, $start_date, $end_date, $total_cost);
+
+
+    if ($stmt->execute()) {
+        header("Location: reserved.php?done");
+        exit;
+    } else {
+        header("Location: reserved.php?fail");
+    }
+
+    $stmt->close();
 }
 ?>
 
@@ -111,7 +157,7 @@ if (isset($_GET["id"])) {
         </header>
 
         <section class="reservation-form">
-            <form action="process_reservation.php" method="POST">
+            <form action="./reserve.php" method="POST">
                 <!-- Hidden car_id to associate with reservation -->
                 <input type="hidden" name="car_id" value="<?php echo $result['car_id']; ?>">
 
@@ -145,7 +191,7 @@ if (isset($_GET["id"])) {
                     <span class="ms-2">I agree to the <a href="#terms-modal" id="terms-link">Terms and Conditions</a>.</span>
                 </label>
                 <!-- Submit Button -->
-                <button type="submit">Reserve Car</button>
+                <button type="submit" name="submit">Reserve Car</button>
             </form>
         </section>
 

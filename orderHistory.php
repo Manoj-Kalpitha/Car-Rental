@@ -95,6 +95,7 @@ session_start();
             <thead>
                 <tr>
                     <th scope="col">Order ID</th>
+                    <th scope="col">status</th>
                     <th scope="col">Car Photo</th>
                     <th scope="col">Car Make</th>
                     <th scope="col">Car Model</th>
@@ -108,7 +109,7 @@ session_start();
                 <?php
 
                 // Prepare the query to select reservations based on user_id
-                $query = "SELECT r.reservation_id, r.start_date, r.end_date, r.total_cost, c.make, c.model, c.year, c.image_url
+                $query = "SELECT r.reservation_id,r.status, r.start_date, r.end_date, r.total_cost, c.make, c.model, c.year, c.image_url
                           FROM reservations r
                           INNER JOIN cars c ON r.car_id = c.car_id
                           WHERE r.customer_id = ?";
@@ -132,6 +133,7 @@ session_start();
                         // Output each reservation in a table row (<tr>) format
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($row['reservation_id']) . "</td>";
+                        echo "<td><button class='btn btn-danger'>" . htmlspecialchars($row['status']) . "</button></td>";
                         echo "<td><img src='./Assest/img/uploads/" . htmlspecialchars($row['image_url']) . "' alt='Car Image' class='car-photo'></td>";
                         echo "<td>" . htmlspecialchars($row['make']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['model']) . "</td>";

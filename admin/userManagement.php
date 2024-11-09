@@ -128,6 +128,7 @@ function suspendUser($conn, $userId)
                 <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>User Type</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -142,6 +143,7 @@ function suspendUser($conn, $userId)
                     echo "<td>" . htmlspecialchars($row['id']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['name']) . "</td>";
                     echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+                    echo "<td>" . htmlspecialchars($row['user_type']) . "</td>";
                     echo "<td>
                             <form action='userManagement.php' method='POST' style='display:inline;'>
                                 <input type='hidden' name='user_id' value='" . htmlspecialchars($row['id']) . "'>
@@ -153,15 +155,15 @@ function suspendUser($conn, $userId)
                             </form>
                             <form action='userManagement.php' method='POST' style='display:inline;'>
                                 <input type='hidden' name='user_id' value='" . htmlspecialchars($row['id']) . "'>
-                                <button type='submit' name='action' value='change' class='btn btn-primary btn-md'>Make As " . htmlspecialchars($row['user_type']) . "</button>
+                                <button type='submit' name='action' value='change' class='btn btn-primary btn-md'>Make As " ?> <?php echo htmlspecialchars($row['user_type']) == "user" ? "Admin" : "User" ?><?php "</button>
                             </form>
                         </td>";
-                    echo "</tr>";
-                }
-            } else {
-                echo "<tr><td colspan='4'>No users found.</td></tr>";
-            }
-            ?>
+                                                                                                                                                                                                                echo "</tr>";
+                                                                                                                                                                                                            }
+                                                                                                                                                                                                        } else {
+                                                                                                                                                                                                            echo "<tr><td colspan='4'>No users found.</td></tr>";
+                                                                                                                                                                                                        }
+                                                                                                                                                                                                                ?>
         </tbody>
     </table>
 </body>

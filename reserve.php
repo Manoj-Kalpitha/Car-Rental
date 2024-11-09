@@ -3,32 +3,45 @@ session_start();
 include_once "./include/db.php";
 
 if (isset($_POST["submit"])) {
+    // Ensure the user is logged in before processing the reservation
+    if (!isset($_SESSION['user_id'])) {
+        // If the user is not logged in, redirect to the login page
+        header("Location: login.php");
+        exit;
+    }
+
+    // Capture form data
     $name = $_POST["name"];
     $email = $_POST["email"];
     $phone = $_POST["phone"];
     $start_date = $_POST["start_date"];
     $end_date = $_POST["end_date"];
     $total_cost = $_POST["total_cost"];
-    $userId = $_SESSION['user_id'];
+    $userId = $_SESSION['user_id']; // User ID from session
 
-    $stmt = $conn->prepare("INSERT INTO reservations (customer_id, car_id, start_date, end_date, total_cost) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("iissi", $userId, $id, $start_date, $end_date, $total_cost);
+    // Prepare the SQL statement to insert the reservation into the database
+    $stmt = $conn->prepare("INSERT INTO reservations (customer_id, car_id,    start_date, end_date, total_cost) VALUES (?, ?, ?,?, ?)");
+    $stmt->bind_param("iisss", $userId, $id, $start_date, $end_date, $total_cost);
 
-
+    // Execute the SQL query
     if ($stmt->execute()) {
-        header("Location: reserved.php?done");
+
+        // Redirect the user to a confirmation page with the reservation ID
+        header("Location: reserved.php?orderId=" . $conn->insert_id);
         exit;
     } else {
+        // If insertion failed, redirect to a failure page
         header("Location: reserved.php?fail");
+        exit;
     }
 
+    // Close the prepared statement
     $stmt->close();
 }
 
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
 
-    // Query to fetch car details based on car_id
     $stmt = $conn->prepare("SELECT * FROM cars WHERE car_id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
@@ -39,28 +52,8 @@ if (isset($_GET["id"])) {
     exit;
 }
 
-if (isset($_POST["submit"])) {
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $phone = $_POST["phone"];
-    $start_date = $_POST["start_date"];
-    $end_date = $_POST["end_date"];
-    $total_cost = $_POST["total_cost"];
-    $userId = $_SESSION['user_id'];
-
-    $stmt = $conn->prepare("INSERT INTO reservations (customer_id, car_id, start_date, end_date, total_cost) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("iissi", $userId, $id, $start_date, $end_date, $total_cost);
 
 
-    if ($stmt->execute()) {
-        header("Location: reserved.php?done");
-        exit;
-    } else {
-        header("Location: reserved.php?fail");
-    }
-
-    $stmt->close();
-}
 ?>
 
 <!DOCTYPE html>

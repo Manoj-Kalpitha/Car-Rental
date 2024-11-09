@@ -2,6 +2,11 @@
 session_start();
 include_once "./include/db.php";
 
+if (isset($_GET["id"])) {
+    $id = $_GET["id"];
+}
+
+
 if (isset($_POST["submit"])) {
     // Ensure the user is logged in before processing the reservation
     if (!isset($_SESSION['user_id'])) {
@@ -19,8 +24,9 @@ if (isset($_POST["submit"])) {
     $total_cost = $_POST["total_cost"];
     $userId = $_SESSION['user_id']; // User ID from session
 
+
     // Prepare the SQL statement to insert the reservation into the database
-    $stmt = $conn->prepare("INSERT INTO reservations (customer_id, car_id,    start_date, end_date, total_cost) VALUES (?, ?, ?,?, ?)");
+    $stmt = $conn->prepare("INSERT INTO reservations (customer_id,car_id,start_date, end_date, total_cost) VALUES (?, ?, ?,?, ?)");
     $stmt->bind_param("iisss", $userId, $id, $start_date, $end_date, $total_cost);
 
     // Execute the SQL query
@@ -150,7 +156,7 @@ if (isset($_GET["id"])) {
         </header>
 
         <section class="reservation-form">
-            <form action="./reserve.php" method="POST">
+            <form action="./reserve.php?id=<?php echo $id; ?>" method="POST">
                 <!-- Hidden car_id to associate with reservation -->
                 <input type="hidden" name="car_id" value="<?php echo $result['car_id']; ?>">
 

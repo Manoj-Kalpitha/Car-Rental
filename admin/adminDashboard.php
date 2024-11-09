@@ -125,7 +125,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';  // Default to 'dash
                         <a class="nav-link" href="?page=userManagement">Users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-danger" href="logout.php">Logout</a>
+                        <a class="nav-link text-danger" href="../include/logout.php">Logout</a>
                     </li>
                 </ul>
             </div>

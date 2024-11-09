@@ -19,7 +19,7 @@ session_start();
             background-color: #f8f9fa;
         }
 
-        .container {
+        .main-container {
             background-color: white;
             border-radius: 8px;
             padding: 20px;
@@ -62,6 +62,13 @@ session_start();
             font-size: 1.1rem;
         }
 
+        .car-photo {
+            width: 80px;
+            /* Adjust the size of the image */
+            height: auto;
+            border-radius: 4px;
+        }
+
         /* Responsive design */
         @media (max-width: 768px) {
 
@@ -78,12 +85,20 @@ session_start();
 </head>
 
 <body>
-    <div class="container mt-5">
+    <?php
+    include_once "./include/nav.php"; // Including the navigation bar
+    ?>
+
+    <div class="main-container mt-5">
         <h1>Order History</h1>
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">Order ID</th>
+                    <th scope="col">Car Photo</th>
+                    <th scope="col">Car Make</th>
+                    <th scope="col">Car Model</th>
+                    <th scope="col">Car Year</th>
                     <th scope="col">Pickup Date</th>
                     <th scope="col">Return Date</th>
                     <th scope="col">Total</th>
@@ -93,7 +108,7 @@ session_start();
                 <?php
 
                 // Prepare the query to select reservations based on user_id
-                $query = "SELECT r.reservation_id, r.start_date, r.end_date, r.total_cost, c.make, c.model, c.year
+                $query = "SELECT r.reservation_id, r.start_date, r.end_date, r.total_cost, c.make, c.model, c.year, c.image_url
                           FROM reservations r
                           INNER JOIN cars c ON r.car_id = c.car_id
                           WHERE r.customer_id = ?";
@@ -117,6 +132,10 @@ session_start();
                         // Output each reservation in a table row (<tr>) format
                         echo "<tr>";
                         echo "<td>" . htmlspecialchars($row['reservation_id']) . "</td>";
+                        echo "<td><img src='./Assest/img/uploads/" . htmlspecialchars($row['image_url']) . "' alt='Car Image' class='car-photo'></td>";
+                        echo "<td>" . htmlspecialchars($row['make']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['model']) . "</td>";
+                        echo "<td>" . htmlspecialchars($row['year']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['start_date']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['end_date']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['total_cost']) . "</td>";
@@ -124,7 +143,7 @@ session_start();
                     }
                 } else {
                     // If no reservations are found, display a message
-                    echo "<tr><td colspan='5' class='text-center'>No reservations found.</td></tr>";
+                    echo "<tr><td colspan='8' class='text-center'>No reservations found.</td></tr>"; // Updated colspan to 8
                 }
 
                 // Close the prepared statement
@@ -137,6 +156,10 @@ session_start();
             </tbody>
         </table>
     </div>
+
+    <?php
+    include_once "./include/footer.php"; // Including the footer
+    ?>
 
     <!-- Bootstrap JS (Optional) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

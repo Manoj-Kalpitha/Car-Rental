@@ -103,6 +103,7 @@ session_start();
                     <th scope="col">Pickup Date</th>
                     <th scope="col">Return Date</th>
                     <th scope="col">Total</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -141,6 +142,11 @@ session_start();
                         echo "<td>" . htmlspecialchars($row['start_date']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['end_date']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['total_cost']) . "</td>";
+                        if ($row['status'] == "Complete") {
+                            echo "<td><button class='btn btn-primary'>pay now</button></td>";
+                        } else {
+                            echo "<td><button class='btn btn-primary'>please wait</button></td>";
+                        }
                         echo "</tr>";
                     }
                 } else {

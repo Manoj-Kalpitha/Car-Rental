@@ -7,10 +7,6 @@ session_start();
 // SQL query to select all items from the cars table
 $sql = "SELECT * FROM cars";
 
-if (isset($_GET["search"])) {
-  $search = $_GET["search"];
-  $sql = "SELECT * FROM cars WHERE make LIKE '%$search%' OR model LIKE '%$search%' OR year LIKE '%$search%' OR registration_no LIKE '%$search%'";
-}
 
 // Execute the query and fetch all results into a variable
 $result = $conn->query($sql);
@@ -59,7 +55,7 @@ $conn->close();
 
 
 
-  <div class="container d-flex flex-wrap gap-5 p-5">
+  <div class="container d-flex flex-wrap gap-5 p-5" id="cars">
     <?php foreach ($cars as $car):
       $carName = $car["make"] . " " . $car["model"];
       $year = $car["year"];
@@ -104,20 +100,65 @@ $conn->close();
 
   <script>
     const searchEl = document.getElementById("search");
+    const cars = document.getElementById("cars");
+
 
     searchEl.addEventListener("keyup", (event) => {
-      console.log(event.target.value);
+
 
       const xhr = new XMLHttpRequest();
-      xhr.open("GET", "./carlist.php?search=" + event.target.value, true);
+      xhr.open("GET", "./include/search_handler.php?search=" + event.target.value, true);
+      xhr.onload = function() {
+        if (this.status == 200) {
+          const res = this.responseText;
+          updateBody(res);
+
+        }
+      }
+
+
       xhr.send();
 
-      updateBody();
     });
 
-    function updateBody() {
-      const bodyEl = document.getElementById("body");
-      bodyEl.innerHTML = "";
+    function updateBody(res) {
+      cars.innerHTML = "";
+
+      JSON.parse(res).forEach(car => {
+        console.log(car)
+
+        const template = `
+           <div class="card mb-3" style="max-width: 540px;">
+          <div class="row g-0">
+              <div class="col-md-6">
+                  <img src="./Assest/img/uploads/${car.image_url}" class="rounded-start " alt="...">
+              </div>
+              <div class="col-md-6">
+                  <div class="card-body">
+                      <h3 class="card-title">${car.make}</h3>
+                      <h3 class="card-title">${car.year}</h3>
+                      <span class="badge text-bg-primary">Year - ${car.year}</span>
+                      <span class="badge text-bg-secondary">Registration No - ${car.registration_no}</span>
+                      <span class="badge text-bg-success">Category - ${car.category}</span>
+                      <span class="badge text-bg-danger">Seat Capacity - ${car.seating_capacity}</span>
+                      <span class="badge text-bg-warning">Fuel Type - ${car.fuel_type}</span>
+                      <span class="badge text-bg-info">${car.status}</span> <br>
+                      ${car.status == "Available" ? `<button class="btn btn-outline-primary  mt-3">
+                          <a href="reserve.php?id=${car.car_id}">Reserve Now</a>
+                      </button>` : `<button class="btn btn-outline-danger mt-3" disabled>Reserved</button>`}
+
+               
+    
+                  </div>
+              </div>
+          </div>
+      </div>
+       `
+
+        cars.innerHTML += template;
+      })
+
+
     }
   </script>
 </body>

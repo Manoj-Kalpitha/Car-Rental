@@ -144,9 +144,9 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';  // Default to 'dash
             include('userManagement.php');
         } else {
             // Default content for the Dashboard
-            echo "<h2>Welcome to Admin Dashboard, <b>$userName</b> </h2>";
+            echo "<h2 class='text-capitalize'>Welcome to Admin Dashboard, <b>$userName</b> </h2>";
             echo "<br>";
-            echo "<p>Select an option from the sidebar to get started.</p>";
+            echo "<p class='text-danger'>Select an option from the sidebar to get started.</p>";
         }
         ?>
     </div>

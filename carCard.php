@@ -1,7 +1,7 @@
     <div class="card mb-3" style="max-width: 540px;">
         <div class="row g-0">
             <div class="col-md-6">
-                <img src="./Assest/img/<?php echo $image ?>" class="rounded-start " alt="...">
+                <img src="./Assest/img/uploads/<?php echo $image ?>" class="rounded-start " alt="...">
             </div>
             <div class="col-md-6">
                 <div class="card-body">
@@ -26,7 +26,6 @@
                     <?php
                     }
                     ?>
-
                 </div>
             </div>
         </div>

@@ -34,6 +34,9 @@
           <li class="nav-item">
             <a class="nav-link navclra" href="contact.php">Contact Us</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link navclra" href="orderHistory.php">Orders</a>
+          </li>
           <?php
           if (isset($_SESSION['user_name'])) {
             if (isset($_SESSION['admin']) == true) { ?>

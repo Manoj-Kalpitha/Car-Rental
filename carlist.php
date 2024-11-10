@@ -2,8 +2,15 @@
 include_once "./include/db.php";
 session_start();
 
+
+
 // SQL query to select all items from the cars table
 $sql = "SELECT * FROM cars";
+
+if (isset($_GET["search"])) {
+  $search = $_GET["search"];
+  $sql = "SELECT * FROM cars WHERE make LIKE '%$search%' OR model LIKE '%$search%' OR year LIKE '%$search%' OR registration_no LIKE '%$search%'";
+}
 
 // Execute the query and fetch all results into a variable
 $result = $conn->query($sql);
@@ -35,6 +42,7 @@ $conn->close();
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="./css/carCard.css">
+  <link rel="stylesheet" href="./css/index.css">
 </head>
 
 <body>
@@ -42,65 +50,12 @@ $conn->close();
   include_once "./include/nav.php";
   ?>
 
-  <!-- filter*******************************************************-->
-
-  <div class="search d-flex justify-content-center ">
-    <div class="search_main w-75 rounded-4">
-      <div class="container">
-        <div class="row align-items-end">
-          <div class="col-md-3">
-            <div class="search1">
-              <h5 class="pb-2">Location</h5>
-              <div class="d-flex align-items-center gap-4">
-                <i data-lucide="map-pin" width="30" class=""></i>
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>Add Location</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="search1">
-              <h5 class="pb-2">Pick-Up-Date</h5>
-              <div class="d-flex align-items-center gap-4">
-                <i data-lucide="calendar" width="18" class=""></i>
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>Add Date</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="search1">
-              <h5 class="pb-2">Return-Date</h5>
-              <div class="d-flex align-items-center gap-4">
-                <i data-lucide="calendar" width="18" class=""></i>
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>Add Date</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="search1 mt-4">
-              <button class="button">search</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="input-group rounded mt-5 w-50 mx-auto">
+    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" id="search" />
+    <span class="input-group-text border-0" id="search-addon">
+      <i class="fas fa-search"></i>
+    </span>
   </div>
-
-  <!--/filter*******************************************************-->
 
 
 
@@ -114,6 +69,7 @@ $conn->close();
       $fuelType = $car["fuel_type"];
       $availability = $car["status"];
       $image = $car["image_url"];
+      $carId = $car["car_id"];
 
 
       include "./carCard.php";
@@ -145,6 +101,25 @@ $conn->close();
 
   <!-- swiper -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+
+  <script>
+    const searchEl = document.getElementById("search");
+
+    searchEl.addEventListener("keyup", (event) => {
+      console.log(event.target.value);
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "./carlist.php?search=" + event.target.value, true);
+      xhr.send();
+
+      updateBody();
+    });
+
+    function updateBody() {
+      const bodyEl = document.getElementById("body");
+      bodyEl.innerHTML = "";
+    }
+  </script>
 </body>
 
 

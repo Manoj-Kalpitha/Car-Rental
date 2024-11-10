@@ -1,6 +1,20 @@
 <?php
 // Include your database connection file here
 include_once "../include/db.php";
+session_start();
+
+
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+
+    $sql = "SELECT * FROM users WHERE id = $userId";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $userName = $row['name'];
+    }
+}
 
 // Get the current page type (e.g., 'manageCars', 'addCar', etc.) from the URL
 $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';  // Default to 'dashboard' if no page is specified
@@ -111,7 +125,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';  // Default to 'dash
                         <a class="nav-link" href="?page=userManagement">Users</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-danger" href="logout.php">Logout</a>
+                        <a class="nav-link text-danger" href="../include/logout.php">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -130,7 +144,8 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';  // Default to 'dash
             include('userManagement.php');
         } else {
             // Default content for the Dashboard
-            echo "<h2>Welcome to Admin Dashboard</h2>";
+            echo "<h2>Welcome to Admin Dashboard, <b>$userName</b> </h2>";
+            echo "<br>";
             echo "<p>Select an option from the sidebar to get started.</p>";
         }
         ?>

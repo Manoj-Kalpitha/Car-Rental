@@ -131,7 +131,7 @@ $conn->close();
            <div class="card mb-3" style="max-width: 540px;">
           <div class="row g-0">
               <div class="col-md-6">
-                  <img src="./Assest/img/${car.image_url}" class="rounded-start " alt="...">
+                  <img src="./Assest/img/uploads/${car.image_url}" class="rounded-start " alt="...">
               </div>
               <div class="col-md-6">
                   <div class="card-body">

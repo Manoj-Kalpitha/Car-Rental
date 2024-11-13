@@ -27,7 +27,7 @@ session_start();
     <div class="container">
       <div class="main_heading text-center">
         <h2>WHY? <span>Choose </span> us</h2>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro, vitae?</p>
+        <p>Choose us for reliable vehicles, affordable rates, and top-notch customer service, ensuring a smooth and stress-free rental experience</p>
       </div>
       <div class=" row py-5 gy-3 ">
         <div class="work2 col-md-3 ">
@@ -114,8 +114,9 @@ session_start();
               <i data-lucide="gem" class="btni"> </i> car rental
             </h6>
             <p>
-              Here you can use rows and columns to organize your footer content. Lorem ipsum
-              dolor sit amet, consectetur adipisicing elit.
+            "At Car Rental, we make your travel hassle-free with a diverse range of vehicles to match every occasion.
+ Whether you're exploring the city or heading on a road trip, 
+trust us for quality service, affordable prices, and an effortless rental experience."
             </p>
           </div>
           <!-- Grid column -->

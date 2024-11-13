@@ -41,8 +41,9 @@
                           <i data-lucide="gem" class="btni"> </i> car rental
                       </h6>
                       <p>
-                          Here you can use rows and columns to organize your footer content. Lorem ipsum
-                          dolor sit amet, consectetur adipisicing elit.
+                      "At Car Rental, we make your travel hassle-free with a diverse range of vehicles to match every occasion.
+ Whether you're exploring the city or heading on a road trip, 
+trust us for quality service, affordable prices, and an effortless rental experience."
                       </p>
                   </div>
                   <!-- Grid column -->

@@ -19,7 +19,7 @@ session_start();
 
   <?php
   include_once "./include/nav.php"
-  ?>
+    ?>
 
 
 
@@ -34,8 +34,12 @@ session_start();
         <div class="col-md-6">
           <div class="">
             <h1>Hi, Welcome to <br><span>Car Rental Protal</span> </h1>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim ut, id iusto nobis eveniet dolore
-              cupiditate sequi aspernatur quam consequuntur!</p>
+            <p>Welcome to our Car Rental Portal, where finding the perfect rental car is quick and hassle-free.
+              Our platform provides an extensive selection of vehicles to fit every need,
+              from luxury models to economy cars, ideal for business trips, vacations, or daily use.
+              With easy account registration and secure login, you can browse available cars,
+              check prices, and make a booking in just a few clicks. Enjoy a seamless rental experience with clear
+              information,transparent pricing, and dedicated customer support to assist you at every step.</p>
 
             <?php
             if (!isset($_SESSION['user_id'])) {
@@ -75,7 +79,7 @@ session_start();
     <div class="container">
       <div class="main_heading text-center">
         <h2>How it <span>Work</span> </h2>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Suscipit, ex?</p>
+        <p>Choose your car, book your rental, pick it up, and return it when you're done. It's that easy!</p>
       </div>
       <!-- ********************************************** -->
       <div class="row py-5">
@@ -87,7 +91,7 @@ session_start();
               </div>
             </div>
             <h5>choose location</h5>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, quos.</p>
+            <p>Begin by selecting the location where you’d like to pick up your car.</p>
           </div>
         </div>
 
@@ -99,7 +103,7 @@ session_start();
               </div>
             </div>
             <h5>Pick-up-date</h5>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, quos.</p>
+            <p>Set your rental start date and time to fit your schedule.</p>
           </div>
         </div>
 
@@ -111,7 +115,7 @@ session_start();
               </div>
             </div>
             <h5>Select car</h5>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque, quos.</p>
+            <p>Browse our fleet and pick the car that best suits your needs.</p>
           </div>
         </div>
       </div>
@@ -129,8 +133,8 @@ session_start();
   <div class="gallery text-center">
     <div class="container">
       <div class="main_heading text-center">
-        <h2>gallery <span>rent </span> Your usrs Today</h2>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro, vitae?</p>
+        <h2>"View, <span>Pick, </span> Book"</h2>
+        <p>Browse our selection and rent today! Find the perfect car for your needs with ease.</p>
       </div>
       <div class="row py-5">
         <div class="col-md-3">

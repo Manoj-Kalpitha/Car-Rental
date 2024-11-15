@@ -137,29 +137,29 @@ session_start();
         <p>Browse our selection and rent today! Find the perfect car for your needs with ease.</p>
       </div>
       <div class="row py-5">
-        <div class="col-md-3">
-          <img src="Assest/img/drive.png" alt="">
+        <div class="col-md-3 ">
+          <img src="Assest/img/uploads/AudiA4_2019.jpg" alt="">
         </div>
         <div class="col-md-3">
-          <img src="Assest/img/drive.png" alt="">
+          <img src="Assest/img/uploads/BmwX5_2023.jpg" alt="">
         </div>
         <div class="col-md-3">
-          <img src="Assest/img/drive.png" alt="">
+          <img src="Assest/img/uploads/FordEscape_2020.jpg" alt="">
         </div>
         <div class="col-md-3">
-          <img src="Assest/img/drive.png" alt="">
+          <img src="Assest/img/uploads/HyundaiSonata_2020.jpg" alt="">
         </div>
         <div class="col-md-3">
-          <img src="Assest/img/drive.png" alt="">
+          <img src="Assest/img/uploads/NissanAltima_2021.jpg" alt="">
         </div>
         <div class="col-md-3">
-          <img src="Assest/img/drive.png" alt="">
+          <img src="Assest/img/uploads/TeslaModel3_2023.jpg" alt="">
         </div>
         <div class="col-md-3">
-          <img src="Assest/img/drive.png" alt="">
+          <img src="Assest/img/ToyotaAxioWXBHybrid_2017.jpg" alt="">
         </div>
         <div class="col-md-3">
-          <img src="Assest/img/drive.png" alt="">
+          <img src="Assest/img/Glory580_2021.jpg" alt="">
         </div>
       </div>
       <button class="button">Start Booking <i data-lucide="move-right" class="ps-1"></i></button>
